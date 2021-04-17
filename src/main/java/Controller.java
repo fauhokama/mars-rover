@@ -28,6 +28,5 @@ public class Controller {
         String listString = String.join("", droneOutput).trim();
 
         return listString;
-
     }
 }
