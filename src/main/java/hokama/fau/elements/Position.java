@@ -1,5 +1,4 @@
-package elements;
-import elements.Direction;
+package hokama.fau.elements;
 
 public class Position {
     private int x;
@@ -12,7 +11,7 @@ public class Position {
         this.direction = direction;
     }
 
-    public void move(Move move) {
+    public void update(Move move) {
         this.x += move.getX();
         this.y += move.getY();
     }

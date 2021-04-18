@@ -1,4 +1,4 @@
-package elements;// use enum?
+package hokama.fau.elements;// use enum?
 
 public enum Instruction {
 

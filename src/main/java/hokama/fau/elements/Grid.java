@@ -1,6 +1,4 @@
-package elements;
-
-import elements.Position;
+package hokama.fau.elements;
 
 public class Grid {
     private final int x;

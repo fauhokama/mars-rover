@@ -1,4 +1,4 @@
-package elements;
+package hokama.fau.elements;
 
 public class Move {
     private int x;

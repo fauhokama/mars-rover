@@ -1,8 +1,8 @@
 package elementsTest;
 
-import elements.Direction;
-import elements.Grid;
-import elements.Position;
+import hokama.fau.elements.Direction;
+import hokama.fau.elements.Grid;
+import hokama.fau.elements.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

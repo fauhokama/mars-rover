@@ -1,7 +1,6 @@
-import elements.Direction;
-import elements.Grid;
-import elements.Instruction;
-import elements.Position;
+package hokama.fau;
+
+import hokama.fau.elements.*;
 
 import java.util.Queue;
 
@@ -18,25 +17,35 @@ public class Drone {
     public void run(Grid grid) {
         for (Instruction i : instructions) {
             execute(i);
-            if (!grid.isValidPosition(position)) {
-                throw new Error("Drone out of bounds!");
-            }
+            checkOutOfBounds(grid);
         }
+    }
+
+    public void checkOutOfBounds(Grid grid) {
+        Direction direction = position.getDirection();
+        if (!grid.isValidPosition(position)) turn(direction.turnAround());
     }
 
     public void execute(Instruction instruction) {
         Direction direction = position.getDirection();
         switch (instruction) {
             case L:
-                position.setDirection(direction.left());
+                turn(direction.left());
                 break;
             case R:
-                position.setDirection(direction.right());
+                turn(direction.right());
                 break;
             case M:
-                position.move(direction.move());
-
+                forward(direction.move());
         }
+    }
+
+    public void turn(Direction direction) {
+        position.setDirection(direction);
+    }
+
+    public void forward(Move move) {
+        position.update(move);
     }
 
     public Position getPosition() {

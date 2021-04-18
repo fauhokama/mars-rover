@@ -1,4 +1,6 @@
-import elements.Grid;
+package hokama.fau;
+
+import hokama.fau.elements.Grid;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,13 @@
+package hokama.fau;
+
+import hokama.fau.parser.Parser;
+import hokama.fau.parser.ParserEngine;
+
 public class Exercise {
     public static void main(String[] args) {
+
+        ParserEngine parserEngine = new ParserEngine();
+        Parser parser = new Parser(parserEngine);
 
         String input =
                 "5 5\n" +
@@ -8,8 +16,7 @@ public class Exercise {
                 "3 3 E\n" +
                 "MMRMMRMRRM";
 
-        Parser p = new Parser();
+        parser.parse(input).start();
 
-        p.parseController(input).start();
     }
 }
