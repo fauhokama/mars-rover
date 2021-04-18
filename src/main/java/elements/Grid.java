@@ -12,15 +12,15 @@ public class Grid {
     }
 
     public boolean isValidPosition(Position position) {
-       return (isNotNegative() && isLowerOrEqualThanGrid(position));
+       return (isNotNegative(position) && isLowerOrEqualThanGrid(position));
     }
 
-    private boolean isNotNegative() {
-        return (this.x <= 0 && this.y <= 0);
+    private boolean isNotNegative(Position position) {
+        return (position.getX() >= 0 && position.getY() >= 0);
     }
 
     private boolean isLowerOrEqualThanGrid(Position position) {
-        return (this.x <= position.getX() || this.y <= position.getY());
+        return (position.getX() <= this.x && position.getY() <= this.y);
     }
 
 }
