@@ -1,3 +1,8 @@
+import elements.Direction;
+import elements.Grid;
+import elements.Instruction;
+import elements.Position;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;

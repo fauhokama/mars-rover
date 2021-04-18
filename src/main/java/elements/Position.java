@@ -1,3 +1,6 @@
+package elements;
+import elements.Direction;
+
 public class Position {
     private int x;
     private int y;
@@ -9,9 +12,9 @@ public class Position {
         this.direction = direction;
     }
 
-    public void move(int x, int y) {
-        this.x += x;
-        this.y += y;
+    public void move(Move move) {
+        this.x += move.getX();
+        this.y += move.getY();
     }
 
     public Direction getDirection() {

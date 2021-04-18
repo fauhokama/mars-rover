@@ -1,3 +1,5 @@
+import elements.Grid;
+
 import java.util.ArrayList;
 
 public class Controller {
@@ -15,18 +17,5 @@ public class Controller {
             drone.run(grid);
             System.out.print(drone.getPosition());
         }
-    }
-
-    public String test() {
-        ArrayList<String> droneOutput = new ArrayList<>();
-        for (Drone drone: drones) {
-            drone.run(grid);
-
-            droneOutput.add(drone.getPosition().toString());
-        }
-
-        String listString = String.join("", droneOutput).trim();
-
-        return listString;
     }
 }

@@ -1,6 +1,5 @@
 public class Exercise {
     public static void main(String[] args) {
-        Parser parser = new Parser();
 
         String input =
                 "5 5\n" +
@@ -9,8 +8,8 @@ public class Exercise {
                 "3 3 E\n" +
                 "MMRMMRMRRM";
 
-        Controller controller = parser.parseController(input);
+        Parser p = new Parser();
 
-        controller.start();
+        p.parseController(input).start();
     }
 }

@@ -1,3 +1,8 @@
+import elements.Direction;
+import elements.Grid;
+import elements.Instruction;
+import elements.Position;
+
 import java.util.Queue;
 
 public class Drone {
@@ -12,43 +17,27 @@ public class Drone {
 
     public void run(Grid grid) {
         for (Instruction i : instructions) {
-            if (i == Instruction.M) {
-                move();
-            } else {
-                turn(i);
-            }
-
+            execute(i);
             if (!grid.isValidPosition(position)) {
                 throw new Error("Drone out of bounds!");
             }
         }
     }
 
-    public void turn(Instruction instruction) {
+    public void execute(Instruction instruction) {
         Direction direction = position.getDirection();
-        int newDegree = (direction.getDegrees() + instruction.getN()) % 360;
-        position.setDirection(direction.change(newDegree));
-    }
+        switch (instruction) {
+            case L:
+                position.setDirection(direction.left());
+                break;
+            case R:
+                position.setDirection(direction.right());
+                break;
+            case M:
+                position.move(direction.move());
 
-    public void move() {
-        switch (position.getDirection()) {
-            case N:
-                position.move(0, 1);
-                break;
-            case E:
-                position.move(1,0);
-                break;
-            case S:
-                position.move(0,-1);
-                break;
-            case W:
-                position.move(-1,0);
-                break;
         }
     }
-
-
-
 
     public Position getPosition() {
         return position;
