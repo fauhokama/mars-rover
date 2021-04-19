@@ -1,8 +1,8 @@
 package hokama.fau.elements;
 
 public class Move {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     public Move(int x, int y) {
         this.x = x;

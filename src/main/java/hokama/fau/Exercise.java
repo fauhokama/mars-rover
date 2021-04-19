@@ -9,12 +9,8 @@ public class Exercise {
         ParserEngine parserEngine = new ParserEngine();
         Parser parser = new Parser(parserEngine);
 
-        String input =
-                "5 5\n" +
-                "1 2 N\n" +
-                "LMLMLMLMM\n" +
-                "3 3 E\n" +
-                "MMRMMRMRRM";
+        // Insert input here:
+        String input = "";
 
         parser.parse(input).start();
 

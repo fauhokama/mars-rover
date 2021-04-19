@@ -2,22 +2,25 @@ package hokama.fau;
 
 import hokama.fau.elements.Grid;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
 
-    private Grid grid;
-    private ArrayList<Drone> drones;
+    private final Grid grid;
+    private final List<Drone> drones;
 
-    public Controller(Grid grid, ArrayList<Drone> drones) {
+    public Controller(Grid grid, List<Drone> drones) {
         this.grid = grid;
         this.drones = drones;
     }
 
-    public void start() {
-        for (Drone drone: drones) {
+    public String start() {
+        StringBuilder result = new StringBuilder();
+        drones.forEach(drone -> {
             drone.run(grid);
-            System.out.print(drone.getPosition());
-        }
+            result.append(drone.getPosition());
+        });
+
+        return result.toString();
     }
 }

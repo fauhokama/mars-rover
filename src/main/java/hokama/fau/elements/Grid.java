@@ -9,16 +9,11 @@ public class Grid {
         this.y = y;
     }
 
-    public boolean isValidPosition(Position position) {
-       return (isNotNegative(position) && isLowerOrEqualThanGrid(position));
+    public int getX() {
+        return x;
     }
 
-    private boolean isNotNegative(Position position) {
-        return (position.getX() >= 0 && position.getY() >= 0);
+    public int getY() {
+        return y;
     }
-
-    private boolean isLowerOrEqualThanGrid(Position position) {
-        return (position.getX() <= this.x && position.getY() <= this.y);
-    }
-
 }

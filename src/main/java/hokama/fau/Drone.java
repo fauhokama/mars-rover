@@ -6,12 +6,16 @@ import java.util.Queue;
 
 public class Drone {
 
-    private Position position;
+    private final Position position;
     private Queue<Instruction> instructions;
 
     public Drone(Position position, Queue<Instruction> instructions) {
         this.position = position;
         this.instructions = instructions;
+    }
+
+    public Drone(Position position) {
+        this.position = position;
     }
 
     public void run(Grid grid) {
@@ -22,8 +26,10 @@ public class Drone {
     }
 
     public void checkOutOfBounds(Grid grid) {
-        Direction direction = position.getDirection();
-        if (!grid.isValidPosition(position)) turn(direction.turnAround());
+        if (!position.isValidPosition(grid)) {
+            turn(position.getDirection().turnAround());
+            forward(getPosition().getDirection().move());
+        }
     }
 
     public void execute(Instruction instruction) {

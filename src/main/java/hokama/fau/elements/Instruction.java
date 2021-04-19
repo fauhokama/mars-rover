@@ -1,8 +1,8 @@
-package hokama.fau.elements;// use enum?
+package hokama.fau.elements;
 
 public enum Instruction {
 
     L,
     R,
-    M;
+    M
 }

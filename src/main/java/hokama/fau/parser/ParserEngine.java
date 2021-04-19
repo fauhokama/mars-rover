@@ -5,6 +5,7 @@ import hokama.fau.elements.Grid;
 import hokama.fau.elements.Instruction;
 import hokama.fau.elements.Position;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -14,30 +15,33 @@ public class ParserEngine {
         String[] tokens = interpret(input);
         int x = Integer.valueOf(tokens[0]);
         int y = Integer.valueOf(tokens[1]);
-        return new Grid(x,y);
+        if (x < 0 || y < 0) throw new IllegalArgumentException("Grid can't be negative.");
+        return new Grid(x, y);
     }
 
     public Position position(String input) {
         String[] tokens = interpret(input);
         int x = Integer.valueOf(tokens[0]);
         int y = Integer.valueOf(tokens[1]);
+        if (x < 0 || y < 0) throw new IllegalArgumentException("Position can't be negative.");
         Direction direction = direction_helper(tokens[2]);
+        if (direction == null) throw new IllegalArgumentException("Direction has to be N, W, S or E");
         return new Position(x, y, direction);
     }
 
     public Queue<Instruction> instruction(String input) {
-        String[] tokens = interpret(input);
+        String[] tokens = interpret_instruction(input);
         Queue<Instruction> instructions = new LinkedList<>();
-
-        for (String c: tokens) {
-            instructions.offer(instruction_helper(c));
-        }
+        Arrays.stream(tokens).forEach(i -> {
+            if (instruction_helper(i) == null) throw new IllegalArgumentException("Wrong Instruction Provided.");
+            instructions.offer(instruction_helper(i));
+        });
         return instructions;
     }
 
-    // No convencido de esto.
+    // Implementation could be improved?
     public Direction direction_helper(String c) {
-        switch(c) {
+        switch (c) {
             case "N":
                 return Direction.N;
             case "W":
@@ -50,9 +54,9 @@ public class ParserEngine {
         return null;
     }
 
-    // No convencido de esto.
+    // Implementation could be improved?
     public Instruction instruction_helper(String c) {
-        switch(c) {
+        switch (c) {
             case "L":
                 return Instruction.L;
             case "R":
@@ -64,7 +68,12 @@ public class ParserEngine {
     }
 
     private String[] interpret(String input) {
-        String[] tokens = input.replaceAll(" ", "").split("");
+        String[] tokens = input.split(" ");
+        return tokens;
+    }
+
+    private String[] interpret_instruction(String input) {
+        String[] tokens = input.split("");
         return tokens;
     }
 
