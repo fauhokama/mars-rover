@@ -24,7 +24,7 @@ public class ParserEngine {
         int x = Integer.valueOf(tokens[0]);
         int y = Integer.valueOf(tokens[1]);
         if (x < 0 || y < 0) throw new IllegalArgumentException("Position can't be negative.");
-        Direction direction = direction_helper(tokens[2]);
+        Direction direction = Direction.valueOf(tokens[2]);
         if (direction == null) throw new IllegalArgumentException("Direction has to be N, W, S or E");
         return new Position(x, y, direction);
     }
@@ -33,38 +33,11 @@ public class ParserEngine {
         String[] tokens = interpret_instruction(input);
         Queue<Instruction> instructions = new LinkedList<>();
         Arrays.stream(tokens).forEach(i -> {
-            if (instruction_helper(i) == null) throw new IllegalArgumentException("Wrong Instruction Provided.");
-            instructions.offer(instruction_helper(i));
+            Instruction instruction = Instruction.valueOf(i);
+            if ( instruction == null) throw new IllegalArgumentException("Wrong Instruction Provided.");
+            instructions.offer(instruction);
         });
         return instructions;
-    }
-
-    // Implementation could be improved?
-    public Direction direction_helper(String c) {
-        switch (c) {
-            case "N":
-                return Direction.N;
-            case "W":
-                return Direction.W;
-            case "S":
-                return Direction.S;
-            case "E":
-                return Direction.E;
-        }
-        return null;
-    }
-
-    // Implementation could be improved?
-    public Instruction instruction_helper(String c) {
-        switch (c) {
-            case "L":
-                return Instruction.L;
-            case "R":
-                return Instruction.R;
-            case "M":
-                return Instruction.M;
-        }
-        return null;
     }
 
     private String[] interpret(String input) {
@@ -76,5 +49,4 @@ public class ParserEngine {
         String[] tokens = input.split("");
         return tokens;
     }
-
 }

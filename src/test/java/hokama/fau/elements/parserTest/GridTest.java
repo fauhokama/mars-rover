@@ -1,4 +1,4 @@
-package parserTest;
+package hokama.fau.elements.parserTest;
 
 import hokama.fau.elements.Grid;
 import hokama.fau.parser.Parser;

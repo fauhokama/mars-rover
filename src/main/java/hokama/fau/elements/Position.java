@@ -63,8 +63,12 @@ public class Position {
 
         Position comparedPosition = (Position) comparedObject;
 
-        return this.x == comparedPosition.x &&
+        if (this.x == comparedPosition.x &&
                 this.y == comparedPosition.y &&
-                this.direction == comparedPosition.direction;
+                this.direction == comparedPosition.direction) {
+            return true;
+        }
+
+        return false;
     }
 }
