@@ -1,84 +1,56 @@
-import org.junit.jupiter.api.*;
+import hokama.fau.Drone;
+import hokama.fau.elements.Grid;
+import hokama.fau.elements.Instruction;
+import hokama.fau.elements.Move;
+import hokama.fau.elements.Position;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-// TODO: test por clases.
+import static hokama.fau.elements.Direction.*;
 
 class DroneTest {
 
-    @Test
-    @DisplayName("Simple Test")
-    void simpleTest() {
-        String input =
-                "3 3\n" +
-                "0 0 S\n" +
-                "RRLLLM\n" +
-                "3 3 W\n" +
-                "MMM\n" +
-                "2 1 W\n" +
-                "MRMRM";
-
-        Parser parser = new Parser();
-
-        Assertions.assertEquals("1 0 E 0 3 W 2 2 E", parser.parseController(input).test());
-    }
-
-    @Test
-    @DisplayName("Bounds_0 Test")
-    void bounds_0Test() {
-
-        String input =
-                "0 0\n" +
-                "0 0 N\n" +
-                "M\n";
-
-        Parser parser = new Parser();
-
-        Assertions.assertThrows(Error.class, () -> {
-            parser.parseController(input).test();
-        });
-    }
-
-    @Test
-    @DisplayName("Bounds_1 Test")
-    void bounds_1Test() {
-        String input =
-                "4 2\n" +
-                "0 0 N\n" +
-                "MMMRM\n";
-
-        Parser parser = new Parser();
-
-        Assertions.assertThrows(Error.class, () -> {
-            parser.parseController(input).test();
-        });
-    }
-
-    @Test
-    @DisplayName("No Drone Test")
-    void noDronesTest() {
-
-        String input =
-                "3 3";
-
-        Parser parser = new Parser();
-
-        Assertions.assertEquals("", parser.parseController(input).test());
-    }
+    private final Position position = new Position(1, 1, N);
+    private final Drone drone = new Drone(position);
 
 
     @Test
-    @DisplayName("Provided Test")
-    void providedTest() {
+    @DisplayName("Move")
+    void test_0() {
+        Move move = new Move(0, 1);
+        drone.forward(move);
 
-        // Provided case
-        String input =
-                "5 5\n" +
-                "1 2 N\n" +
-                "LMLMLMLMM\n" +
-                "3 3 E\n" +
-                "MMRMMRMRRM";
-
-        Parser parser = new Parser();
-
-        Assertions.assertEquals("1 3 N 5 1 E", parser.parseController(input).test());
+        Assertions.assertEquals(drone.getPosition(), new Position(1, 2, N));
     }
+
+    @Test
+    @DisplayName("Turn N to W")
+    void test_1() {
+        drone.turn(N.left());
+        Assertions.assertEquals(drone.getPosition(), new Position(1, 1, W));
+    }
+
+    @Test
+    @DisplayName("Execute an instruction R")
+    void test_2() {
+        drone.execute(Instruction.R);
+        Assertions.assertEquals(drone.getPosition(), new Position(1, 1, E));
+    }
+
+    @Test
+    @DisplayName("Out of Bounds Test")
+    void test_3() {
+        // Drone in 1 1 N. Grid is 1 1
+        Grid grid = new Grid(1, 1);
+
+        // If drone moves N, its going to be Out of Bounds.
+        drone.forward(new Move(0, 1));
+
+        // Drone should turnaround and face S.
+        drone.checkOutOfBounds(grid);
+
+        Assertions.assertEquals(drone.getPosition(), new Position(1, 1, S));
+    }
+
 }
